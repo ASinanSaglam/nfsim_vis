@@ -150,6 +150,9 @@ export class Component extends Actor {
     this.curr_state_id = state.id;
     this.current_state = state;
   }
+  get_state_by_id(state_id) {
+    return this.states[state_id];
+  }
   set_state_by_id(state_id) {
     this.prev_state_id = this.curr_state_id;
     this.curr_state_id = state_id;
