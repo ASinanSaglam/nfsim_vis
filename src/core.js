@@ -119,6 +119,7 @@ export class Component extends Actor {
     this.states = states;
     this.current_state = current_state;
     this.curr_state_id = null;
+    this.prev_state_id = null;
     this.current_render;
     this.pos = pos;
     this.bonds = {};
@@ -145,14 +146,17 @@ export class Component extends Actor {
     state.set_parent(this);
   }
   set_state(state) {
+    this.prev_state_id = this.curr_state_id;
     this.curr_state_id = state.id;
     this.current_state = state;
   }
   set_state_by_id(state_id) {
+    this.prev_state_id = this.curr_state_id;
     this.curr_state_id = state_id;
     this.current_state = this.states[state_id];
   }
   next_state () {
+    this.prev_state_id = this.curr_state_id;
     let next_id = (this.curr_state_id+1)%this.states.length;
     this.curr_state_id = next_id;
     this.current_state = this.states[this.curr_state_id];
